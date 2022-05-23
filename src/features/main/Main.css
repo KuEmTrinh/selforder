@@ -1,0 +1,30 @@
+.main{
+    display: flex;
+    align-items: center;
+}
+.mainComponent{
+    margin: 1rem;
+    height: auto;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+}
+.componentTitle{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.inputBox{
+    padding: 1rem 0;
+}
+.inputBoxTitle{
+    margin-right: 1rem;
+}
+.inputBoxEnter{
+    padding: 0.7rem 1.3rem;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(243, 243, 243);
+}

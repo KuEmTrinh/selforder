@@ -13,6 +13,10 @@
     color: black;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+.button-green{
+    background-color: #4CAF50;
+    color: #fff;
+}
 .flex{
     display: flex;
 }
@@ -30,4 +34,7 @@
 }
 .w-80per{
     width: 80%;
+}
+.mt-1{
+    margin-top: 1rem;
 }
