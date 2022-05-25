@@ -11,7 +11,7 @@ export default function CategoryList({ categoryList }) {
             className="categoryItem"
             key={element.id}
             onClick={() => {
-              navigate(`/menu/${element.id}`);
+              navigate(`/menu/${element.id}/${element.name}`);
             }}
           >
             {element.name}

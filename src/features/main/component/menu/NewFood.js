@@ -2,44 +2,77 @@ import React from "react";
 import { useState } from "react";
 import { storage } from "../../../../app/firebase";
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-export default function NewFood() {
-  const [imgUrl, setImgUrl] = useState(null);
+import CircularProgress from "@mui/material/CircularProgress";
+import CheckIcon from "@mui/icons-material/Check";
+import { db } from "../../../../app/firebase";
+import { firebase } from "../../../../app/firebase";
+export default function NewFood({ categoryId, categoryName }) {
   const [file, setFile] = useState("");
-  const [progresspercent, setProgresspercent] = useState(0);
+  const [percent, setPercent] = useState(0);
+  const [resultBox, setResultBox] = useState(false);
+  const [foodVietnamese, setFoodVietnamese] = useState("");
+  const [foodJapanese, setFoodJapanese] = useState("");
+  const [foodPrice, setPrice] = useState("");
+  const foodVietnameseChangeValue = (e) => {
+    setFoodVietnamese(e.target.value);
+  };
+  const foodJapaneseChangeValue = (e) => {
+    setFoodJapanese(e.target.value);
+  };
+  const foodPriceChangeValue = (e) => {
+    setPrice(e.target.value);
+  };
+  const setNomarl = () => {
+    setFoodVietnamese("");
+    setFoodJapanese("");
+    setPrice("");
+  }
   const createNewFood = (downloadURL) => {
-    console.log(downloadURL);
+    db.collection("category").doc(categoryId).collection("food").add({
+      vietnamese : foodVietnamese,
+      japanese: foodJapanese,
+      price: foodPrice,
+      imgUrl: downloadURL,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    setNomarl();
   };
-  const handleFile = (e) => {
-    e.preventDefault();
-    setFile(e.target[0]?.files[0]);
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
   };
-  const handleSubmit = () => {
-    if (!file) return;
-
-    const storageRef = ref(storage, `files/${file.name}`);
+  const handleUpload = () => {
+    if (!file) {
+      alert("Please choose a file first!");
+    }
+    setResultBox(true);
+    const storageRef = ref(storage, `/files/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress = Math.round(
+        const percent = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
-        setProgresspercent(progress);
+
+        // update progress
+        setPercent(percent);
       },
-      (error) => {
-        alert(error);
-      },
+      (err) => console.log(err),
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImgUrl(downloadURL);
-          createNewFood(downloadURL);
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          createNewFood(url);
         });
       }
     );
+    setTimeout(() => {
+      setResultBox(false);
+    }, "3500");
   };
+
   return (
     <div>
-      <p className="componentTitle">Create New Food</p>
+      <p className="componentTitle">Create new Food {String(categoryName)} Category </p>
       <table>
         <tbody>
           <tr>
@@ -48,7 +81,7 @@ export default function NewFood() {
             </td>
             <th>
               <div className="inputBox flex align-center">
-                <input className="inputBoxEnter" />
+                <input className="inputBoxEnter" onChange={foodVietnameseChangeValue}/>
               </div>
             </th>
           </tr>
@@ -58,7 +91,7 @@ export default function NewFood() {
             </td>
             <td>
               <div className="inputBox flex align-center">
-                <input className="inputBoxEnter" />
+                <input className="inputBoxEnter" onChange={foodJapaneseChangeValue} />
               </div>
             </td>
           </tr>
@@ -68,7 +101,7 @@ export default function NewFood() {
             </td>
             <td>
               <div className="inputBox flex align-center">
-                <input className="inputBoxEnter" />
+                <input className="inputBoxEnter" onChange={foodPriceChangeValue}/>
               </div>
             </td>
           </tr>
@@ -78,33 +111,28 @@ export default function NewFood() {
             </td>
             <td>
               <div className="inputBox flex align-center">
-                {/* <form onSubmit={handleSubmit}> */}
-                <input type="file" onChange={handleFile} />
-                <button className="button button-green" onClick={handleSubmit}>
-                  Upload
-                </button>
-                {/* </form> */}
-                {!imgUrl && (
-                  <div className="outerbar">
-                    <div
-                      className="innerbar"
-                      style={{ width: `${progresspercent}%` }}
-                    >
-                      {progresspercent}%
-                    </div>
-                  </div>
-                )}
-                {/* {imgUrl && <img src={imgUrl} alt="uploaded file" height={200} />}
-              {imgUrl} */}
+                <input type="file" onChange={handleChange} accept="" className="selectImageButton" />
               </div>
             </td>
           </tr>
+          <button className="button button-green" onClick={handleUpload}>
+            Create
+          </button>
+          {resultBox ? (
+            <div className="resultBox">
+              {percent === 100 ? (
+                <CheckIcon color="success" fontSize="large"></CheckIcon>
+              ) : (
+                <div className="indexTop">
+                  <CircularProgress variant="determinate" value={percent} />
+                </div>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
         </tbody>
       </table>
-
-      {/* <button className="button button-green" onClick={createFile}>
-        Create
-      </button> */}
     </div>
   );
 }

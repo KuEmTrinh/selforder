@@ -12,7 +12,7 @@ export default function Main() {
         <Routes>
           <Route path="/order" element={<Order />} />
           <Route path="/menu/" element={<Menu />} />
-          <Route path="/menu/:id" element={<Food />} />
+          <Route path="/menu/:id/:name" element={<Food />} />
           <Route path="/table" element={<Table />} />
           {/* <Route path="/bill" element={<About />} />
         <Route path="/money" element={<About />} />
