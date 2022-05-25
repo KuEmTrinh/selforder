@@ -21,8 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const authentication = getAuth(app);
-const storage = getStorage(app);
-export default storage;
+export const storage = getStorage(app);
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 export { db };
