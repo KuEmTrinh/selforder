@@ -52,3 +52,20 @@
   .selectImageButton:active::before {
     background-color: rgb(243, 243, 243);
   }
+  .printButton{
+      display: flex;
+      justify-content: center;
+  }
+  .textCenter{
+      text-align: center;
+  }
+  .textDescription{
+      padding: 1rem;
+      text-align: center;
+  }
+  .qrCode{
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+  }

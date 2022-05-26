@@ -4,7 +4,7 @@ export default function CategoryList({ categoryList }) {
   let navigate = useNavigate();
   return (
     <>
-      <p className="componentTitle categoryList">Category List</p>
+      <p className="componentTitle categoryList">Danh Mục</p>
       <div className="categories">
         {categoryList.map((element) => {
           return (

@@ -4,7 +4,6 @@ import { useReactToPrint } from "react-to-print";
 export default function TableQRCode(props) {
   const table = JSON.parse(props.table);
   const tableId = table.id;
-  console.log(tableId);
   const [qrLink, setQrLink] = useState("");
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -13,18 +12,29 @@ export default function TableQRCode(props) {
   useEffect(() => {
     setQrLink("http://localhost:3000/table/" + tableId);
   }, []);
-  const QRCode = React.forwardRef((props, ref) => {
-    // ...
-
-    return <div ref={ref}>Print this</div>;
+  const RenderComponent = React.forwardRef((props, ref) => {
+    return (
+      <div ref={ref}>
+        <div className="qrCode">
+          <QRCode value={props.qrLink} ref={componentRef} />
+        </div>
+        <p className="componentTitle textCenter mt-1">{props.tableName}</p>
+        <p className="textDescription">Quét mã để gọi món</p>
+      </div>
+    );
   });
   return (
     <div>
-      <QRCode value={qrLink} ref={componentRef} />
-      <button className="button button-green" onClick={handlePrint}>
-        {" "}
-        Print Resume{" "}
-      </button>
+      <RenderComponent
+        tableName={table.name}
+        qrLink={qrLink}
+        ref={componentRef}
+      />
+      <div className="printButton">
+        <button className="button button-green " onClick={handlePrint}>
+          In Mã
+        </button>
+      </div>
     </div>
   );
 }

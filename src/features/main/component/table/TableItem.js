@@ -18,7 +18,7 @@ export default function TableItem({ tables }) {
       >
         <TableQRCode table={JSON.stringify(tables[tableIndex])}></TableQRCode>
       </Modal>
-      <p className="componentTitle categoryList">Table List</p>
+      <p className="componentTitle categoryList">Danh Sách Bàn</p>
       <div className="categories">
         {tables.map((element, index) => {
           return (

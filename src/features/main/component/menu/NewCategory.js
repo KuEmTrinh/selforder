@@ -23,9 +23,9 @@ export default function NewCategory() {
   };
   return (
     <>
-      <p className="componentTitle">Create Category</p>
+      <p className="componentTitle">Tạo Danh Mục</p>
       <div className="inputBox flex align-center">
-        <p className="inputBoxTitle">Name</p>
+        <p className="inputBoxTitle">Tên</p>
         <input
           value={inputValue}
           className="inputBoxEnter"
@@ -40,7 +40,7 @@ export default function NewCategory() {
           createCategory();
         }}
       >
-        Create
+        Tạo
       </button>
     </>
   );

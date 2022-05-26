@@ -66,7 +66,7 @@ export default function FoodList({ categoryId }) {
                       editThisFood(index);
                     }}
                   >
-                    Edit
+                    Sửa
                   </button>
                 </div>
               </div>

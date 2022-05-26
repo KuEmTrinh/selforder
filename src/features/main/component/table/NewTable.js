@@ -22,9 +22,9 @@ export default function NewTable() {
   };
   return (
     <div>
-      <p className="componentTitle">Create New Table</p>
+      <p className="componentTitle">Tạo Bàn</p>
       <div className="inputBox flex align-center">
-        <p className="inputBoxTitle">Name</p>
+        <p className="inputBoxTitle">Tên</p>
         <input
           value={inputValue}
           className="inputBoxEnter"
@@ -34,7 +34,7 @@ export default function NewTable() {
         />
       </div>
       <button className="button button-green" onClick={createTable}>
-        Create
+        Tạo
       </button>
     </div>
   );

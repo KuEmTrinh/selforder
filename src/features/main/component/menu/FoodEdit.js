@@ -59,7 +59,7 @@ export default function FoodEdit(props) {
           />
         </div>
         <button className="foodButton" onClick={editThisFood}>
-          Edit
+          Sửa
         </button>
       </div>
     </div>

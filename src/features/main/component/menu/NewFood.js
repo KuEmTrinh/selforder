@@ -75,13 +75,13 @@ export default function NewFood({ categoryId, categoryName }) {
   return (
     <div>
       <p className="componentTitle">
-        Create new Food {String(categoryName)} Category{" "}
+        Tạo Sản Phẩm Cho {String(categoryName)}
       </p>
       <table>
         <tbody>
           <tr>
             <td>
-              <p className="inputBoxTitle">Vietnamese</p>
+              <p className="inputBoxTitle">Tên Tiếng Việt</p>
             </td>
             <th>
               <div className="inputBox flex align-center">
@@ -95,7 +95,7 @@ export default function NewFood({ categoryId, categoryName }) {
           </tr>
           <tr>
             <td>
-              <p className="inputBoxTitle">Japanese</p>
+              <p className="inputBoxTitle">Tên Tiếng Nhật</p>
             </td>
             <td>
               <div className="inputBox flex align-center">
@@ -109,7 +109,7 @@ export default function NewFood({ categoryId, categoryName }) {
           </tr>
           <tr>
             <td>
-              <p className="inputBoxTitle">Price</p>
+              <p className="inputBoxTitle">Giá</p>
             </td>
             <td>
               <div className="inputBox flex align-center">
@@ -123,7 +123,7 @@ export default function NewFood({ categoryId, categoryName }) {
           </tr>
           <tr>
             <td>
-              <p className="inputBoxTitle">Image</p>
+              <p className="inputBoxTitle">Hình Ảnh</p>
             </td>
             <td>
               <div className="inputBox flex align-center">
@@ -137,7 +137,7 @@ export default function NewFood({ categoryId, categoryName }) {
             </td>
           </tr>
           <button className="button button-green" onClick={handleUpload}>
-            Create
+            Tạo
           </button>
           {resultBox ? (
             <div className="resultBox">
