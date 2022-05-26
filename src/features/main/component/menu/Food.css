@@ -1,6 +1,11 @@
+.foods{
+    overflow-x: auto;
+    width: calc(100%);
+}
 .food{
-    width: 11rem;
-    margin-bottom: 2rem;
+    width: 10rem;
+    /* margin-bottom: 2rem; */
+    padding: 0.5rem;
 }
 .foodImage{
     position: relative;
@@ -10,6 +15,7 @@
     padding-top: 100%;
     margin-bottom: 1rem;
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     overflow: hidden;
 }
 img {
@@ -27,16 +33,12 @@ img {
 }
 .foodContent{
     display: flex;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    width: 100%;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
+    width: 10rem;
     justify-content: space-between;
     position: relative;
 }
 .foodDetails{
+    width: 7rem;
     line-height: 2.5rem;
     width: 85%;
 }
@@ -60,8 +62,8 @@ img {
     border: none;
     background-color: #272727;
     color: white;
-    padding: 1.2rem;
-    border-radius: 1rem;
+    padding: 8px;
+    border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
 }

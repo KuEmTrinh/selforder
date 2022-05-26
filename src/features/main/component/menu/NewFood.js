@@ -23,19 +23,21 @@ export default function NewFood({ categoryId, categoryName }) {
     setPrice(e.target.value);
   };
   const setNomarl = () => {
+    setResultBox(false);
+    setFile("");
     setFoodVietnamese("");
     setFoodJapanese("");
     setPrice("");
-  }
+    setPercent("");
+  };
   const createNewFood = (downloadURL) => {
     db.collection("category").doc(categoryId).collection("food").add({
-      vietnamese : foodVietnamese,
+      vietnamese: foodVietnamese,
       japanese: foodJapanese,
       price: foodPrice,
       imgUrl: downloadURL,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    })
-    setNomarl();
+    });
   };
   const handleChange = (event) => {
     setFile(event.target.files[0]);
@@ -66,13 +68,15 @@ export default function NewFood({ categoryId, categoryName }) {
       }
     );
     setTimeout(() => {
-      setResultBox(false);
+      setNomarl();
     }, "3500");
   };
 
   return (
     <div>
-      <p className="componentTitle">Create new Food {String(categoryName)} Category </p>
+      <p className="componentTitle">
+        Create new Food {String(categoryName)} Category{" "}
+      </p>
       <table>
         <tbody>
           <tr>
@@ -81,7 +85,11 @@ export default function NewFood({ categoryId, categoryName }) {
             </td>
             <th>
               <div className="inputBox flex align-center">
-                <input className="inputBoxEnter" onChange={foodVietnameseChangeValue}/>
+                <input
+                  value={foodVietnamese}
+                  className="inputBoxEnter"
+                  onChange={foodVietnameseChangeValue}
+                />
               </div>
             </th>
           </tr>
@@ -91,7 +99,11 @@ export default function NewFood({ categoryId, categoryName }) {
             </td>
             <td>
               <div className="inputBox flex align-center">
-                <input className="inputBoxEnter" onChange={foodJapaneseChangeValue} />
+                <input
+                  value={foodJapanese}
+                  className="inputBoxEnter"
+                  onChange={foodJapaneseChangeValue}
+                />
               </div>
             </td>
           </tr>
@@ -101,7 +113,11 @@ export default function NewFood({ categoryId, categoryName }) {
             </td>
             <td>
               <div className="inputBox flex align-center">
-                <input className="inputBoxEnter" onChange={foodPriceChangeValue}/>
+                <input
+                  value={foodPrice}
+                  className="inputBoxEnter"
+                  onChange={foodPriceChangeValue}
+                />
               </div>
             </td>
           </tr>
@@ -111,7 +127,12 @@ export default function NewFood({ categoryId, categoryName }) {
             </td>
             <td>
               <div className="inputBox flex align-center">
-                <input type="file" onChange={handleChange} accept="" className="selectImageButton" />
+                <input
+                  type="file"
+                  onChange={handleChange}
+                  accept=""
+                  className="selectImageButton"
+                />
               </div>
             </td>
           </tr>

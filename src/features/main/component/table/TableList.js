@@ -2,14 +2,13 @@ import React from "react";
 import { db } from "../../../../app/firebase";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import CategoryList from "./CategoryList";
-import "./Category.css";
-export default function Categories() {
+import TableItem from "./TableItem";
+export default function TableList() {
   const userInfomation = JSON.parse(useSelector((state) => state.login.data));
   const uid = userInfomation.uid;
-  const [categoryList, setCategoryList] = useState("");
+  const [tableListData, setTableListData] = useState("");
   useEffect(() => {
-    const query = db.collection("category").where("uid", "==", uid);
+    const query = db.collection("table").where("uid", "==", uid);
     const observer = query.onSnapshot((querySnapshot) => {
       const data = [];
       querySnapshot.docs.map((doc) => {
@@ -18,17 +17,13 @@ export default function Categories() {
           name: doc.data().name,
         });
       });
-      setCategoryList(data);
+      setTableListData(data);
     });
     return observer;
   }, []);
   return (
     <div className="list">
-      {categoryList ? (
-        <CategoryList categoryList={categoryList}></CategoryList>
-      ) : (
-        "Loading Data"
-      )}
+      {tableListData ? <TableItem tables={tableListData} /> : "Loading Data"}
     </div>
   );
 }

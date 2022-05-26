@@ -5,19 +5,21 @@ export default function CategoryList({ categoryList }) {
   return (
     <>
       <p className="componentTitle categoryList">Category List</p>
-      {categoryList.map((element) => {
-        return (
-          <span
-            className="categoryItem"
-            key={element.id}
-            onClick={() => {
-              navigate(`/menu/${element.id}/${element.name}`);
-            }}
-          >
-            {element.name}
-          </span>
-        );
-      })}
+      <div className="categories">
+        {categoryList.map((element) => {
+          return (
+            <span
+              className="categoryItem"
+              key={element.id}
+              onClick={() => {
+                navigate(`/menu/${element.id}/${element.name}`);
+              }}
+            >
+              {element.name}
+            </span>
+          );
+        })}
+      </div>
     </>
   );
 }
