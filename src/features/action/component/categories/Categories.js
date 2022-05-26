@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Categories.css";
 import FoodList from "../food/FoodList";
 export default function Categories({ data }) {
+  useEffect(()=>{
+    setCategoryId(data[0].id)
+  },[])
   const [categoryId, setCategoryId] = useState("");
   const [indexCategory, setIndexCategory] = useState(0);
   return (

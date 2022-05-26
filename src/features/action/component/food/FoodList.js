@@ -3,12 +3,19 @@ import { db } from "../../../../app/firebase";
 import "./FoodList.css";
 import { useDispatch } from "react-redux";
 import { addFoodToCart } from "./foodSlice";
+import Toast from "../../../toast/Toast";
 export default function FoodList({ categoryId }) {
   const dispatch = useDispatch();
   const [foodList, setFoodList] = useState("");
+  const [message, setMessage] = useState("");
   const addToCart = (index) => {
     const sendData = JSON.stringify(foodList[index]);
     dispatch(addFoodToCart(sendData));
+    setMessage([...message, "Thêm vào"]);
+    // setTimeout(() => {
+    //   const popMessage = message.pop();
+    //   setMessage(popMessage);
+    // }, "1000");
   };
   useEffect(() => {
     const query = db
@@ -33,6 +40,7 @@ export default function FoodList({ categoryId }) {
   }, [categoryId]);
   return (
     <>
+      <Toast message={message}></Toast>
       {foodList ? (
         <div className="foodOrder">
           {foodList.map((el, index) => {

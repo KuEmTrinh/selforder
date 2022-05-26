@@ -43,3 +43,8 @@
 .cartCountNumber{
     padding: 5px;
 }
+.cart{
+    margin-top: 1rem;
+    height: calc(100vh - 8rem);
+    overflow-y: auto;
+}
