@@ -13,6 +13,7 @@ export const foodSlice = createSlice({
       item.count = 1;
       state.data.push(item);
     },
+    
   },
 });
 

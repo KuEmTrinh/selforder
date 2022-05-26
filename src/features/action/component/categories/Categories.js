@@ -6,7 +6,7 @@ export default function Categories({ data }) {
   const [indexCategory, setIndexCategory] = useState(0);
   return (
     <>
-      <div className="categories categoryBox">
+      <div className="categoryBox">
         {data.map((element, index) => {
           return (
             <span

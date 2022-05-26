@@ -6,7 +6,7 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .categoryBox{
-    padding: 15px;
+    padding: 25px;
     background-color: #fff;
     overflow-x: auto;
 }
