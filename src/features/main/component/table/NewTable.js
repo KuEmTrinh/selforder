@@ -3,6 +3,10 @@ import { useSelector } from "react-redux";
 import { db } from "../../../../app/firebase";
 import { firebase } from "../../../../app/firebase";
 export default function NewTable() {
+  const getRandomInt = (max) => {
+    return Math.floor(Math.random() * max + 1);
+  };
+
   const userInfomation = JSON.parse(useSelector((state) => state.login.data));
   const [inputValue, setInputValue] = useState("");
   const createTable = () => {
@@ -10,6 +14,7 @@ export default function NewTable() {
       db.collection("table").add({
         name: inputValue,
         uid: userInfomation.uid,
+        code: getRandomInt(10000),
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       });
       setInputValue("");

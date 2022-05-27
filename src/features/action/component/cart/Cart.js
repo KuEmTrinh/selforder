@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Cart.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import {
+  deleteFoodCart,
+  plusFoodCart,
+  minusFoodCart,
+  setTotalCart,
+} from "../food/foodSlice";
 export default function Cart() {
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.food.data);
   const [cartData, setCartData] = useState("");
+  const deleteCartItem = (id) => {
+    dispatch(deleteFoodCart(id));
+  };
   useEffect(() => {
     const cloneCartData = [...data];
     const newArray = JSON.parse(JSON.stringify(cloneCartData));
@@ -14,33 +25,42 @@ export default function Cart() {
       for (let j = i + 1; j < newArray.length; j++) {
         if (firstLoopItem.id == newArray[j].id) {
           newArray[i].count += 1;
-          newArray[i].newPrice = newArray[i].price * newArray[i];
+          newArray[i].newPrice = newArray[i].price * newArray[i].count;
           newArray.splice(j, 1);
           j -= 1;
         }
       }
     }
+    function compare(a, b) {
+      if (a.vietnamese < b.vietnamese) {
+        return -1;
+      }
+      if (a.vietnamese > b.vietnamese) {
+        return 1;
+      }
+      return 0;
+    }
+    let total = 0;
+    newArray.map((el) => {
+      if (el.newPrice) {
+        total += parseInt(el.newPrice);
+      } else {
+        total += parseInt(el.price);
+      }
+    });
+    newArray.sort(compare);
+    dispatch(setTotalCart(total));
     setCartData(newArray);
-  }, []);
-  // console.log(data);
-  const countPlus = (index) => {
-    const cartDataCopy = JSON.parse(JSON.stringify(cartData));
-    cartDataCopy[index].count += 1;
-    cartDataCopy[index].newPrice =
-      cartData[index].price * cartDataCopy[index].count;
-    setCartData(cartDataCopy);
+  }, [data]);
+  const countPlus = (id) => {
+    dispatch(plusFoodCart(id));
   };
-  const countMinus = (index) => {
-    const cartDataCopy = JSON.parse(JSON.stringify(cartData));
-    cartDataCopy[index].count -= 1;
-    cartDataCopy[index].newPrice =
-      cartData[index].price * cartDataCopy[index].count;
-    setCartData(cartDataCopy);
+  const countMinus = (id) => {
+    dispatch(minusFoodCart(id));
   };
 
   return (
     <>
-  
       {cartData ? (
         <>
           <p className="componentTitle cartTitle">Danh sách Order</p>
@@ -48,6 +68,17 @@ export default function Cart() {
             {cartData.map((el, index) => {
               return (
                 <div className="cartItem" key={index}>
+                  <div
+                    className="cartItemDelete"
+                    onClick={() => {
+                      deleteCartItem(el.id);
+                    }}
+                  >
+                    <HighlightOffIcon
+                      fontSize="medium"
+                      style={{ color: "#c43c35" }}
+                    ></HighlightOffIcon>
+                  </div>
                   <div className="cartImage">
                     <img src={el.imgUrl} />
                   </div>
@@ -64,7 +95,7 @@ export default function Cart() {
                         <div
                           className="cartCountMinus"
                           onClick={() => {
-                            countMinus(index);
+                            countMinus(el.id);
                           }}
                         >
                           <RemoveIcon></RemoveIcon>
@@ -77,7 +108,7 @@ export default function Cart() {
                       <div
                         className="cartCountPlus"
                         onClick={() => {
-                          countPlus(index);
+                          countPlus(el.id);
                         }}
                       >
                         <AddIcon></AddIcon>

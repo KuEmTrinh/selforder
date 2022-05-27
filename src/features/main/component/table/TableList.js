@@ -14,6 +14,7 @@ export default function TableList() {
       querySnapshot.docs.map((doc) => {
         data.push({
           id: doc.id,
+          code: doc.data().code,
           name: doc.data().name,
         });
       });

@@ -6,6 +6,7 @@
     padding: 1rem;
     display: flex;
     align-items: center;
+    position: relative;
 }
 .cartImage img{
     width: 5rem;
@@ -48,3 +49,12 @@
     height: calc(100vh - 8rem);
     overflow-y: auto;
 }
+
+.cartItemDelete{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%,-50%);
+}
+ 
+ 

@@ -21,7 +21,7 @@ export default function Action() {
     <>
       <Navigation></Navigation>
       {
-        tableInfo? <Main userId={tableInfo.uid}></Main>: ""
+        tableInfo? <Main userId={tableInfo.uid} tableInfo={tableInfo} connectCode={params?.code}></Main>: ""
       }
     </>
   );

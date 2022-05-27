@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/table/:id" element={<Action />} />
+        <Route path="/table/:id/:code" element={<Action />} />
         <Route path="*" element={<Login></Login>} />
       </Routes>
     </>

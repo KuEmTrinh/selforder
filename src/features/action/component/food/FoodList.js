@@ -3,20 +3,34 @@ import { db } from "../../../../app/firebase";
 import "./FoodList.css";
 import { useDispatch } from "react-redux";
 import { addFoodToCart } from "./foodSlice";
-import Toast from "../../../toast/Toast";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function FoodList({ categoryId }) {
   const dispatch = useDispatch();
   const [foodList, setFoodList] = useState("");
+  const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const addToCart = (index) => {
     const sendData = JSON.stringify(foodList[index]);
     dispatch(addFoodToCart(sendData));
-    setMessage([...message, "Thêm vào"]);
-    // setTimeout(() => {
-    //   const popMessage = message.pop();
-    //   setMessage(popMessage);
-    // }, "1000");
+    setMessage("Đã thêm");
+    setOpen(true);
   };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const [state, setState] = useState({
+    vertical: "top",
+    horizontal: "right",
+  });
+  const { vertical, horizontal } = state;
   useEffect(() => {
     const query = db
       .collection("category")
@@ -40,7 +54,23 @@ export default function FoodList({ categoryId }) {
   }, [categoryId]);
   return (
     <>
-      <Toast message={message}></Toast>
+      <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          autoHideDuration={1000}
+          onClose={handleClose}
+          key={vertical + horizontal}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "50%" }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      </Stack>
       {foodList ? (
         <div className="foodOrder">
           {foodList.map((el, index) => {

@@ -3,6 +3,7 @@ import QRCode from "react-qr-code";
 import { useReactToPrint } from "react-to-print";
 export default function TableQRCode(props) {
   const table = JSON.parse(props.table);
+  const tableCode = table.code;
   const tableId = table.id;
   const [qrLink, setQrLink] = useState("");
   const componentRef = useRef();
@@ -10,7 +11,7 @@ export default function TableQRCode(props) {
     content: () => componentRef.current,
   });
   useEffect(() => {
-    setQrLink("http://localhost:3000/table/" + tableId);
+    setQrLink("http://localhost:3000/table/" + tableId + "/" + tableCode);
   }, []);
   const RenderComponent = React.forwardRef((props, ref) => {
     return (
