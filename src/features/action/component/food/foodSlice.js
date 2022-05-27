@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   data: [],
   total: "",
+  totalCount: 0,
 };
 
 export const foodSlice = createSlice({
@@ -13,6 +14,7 @@ export const foodSlice = createSlice({
       const item = JSON.parse(action.payload);
       item.count = 1;
       state.data.push(item);
+      state.totalCount = state.data.length;
     },
     deleteFoodCart: (state, action) => {
       const idItemCart = action.payload;
@@ -20,6 +22,7 @@ export const foodSlice = createSlice({
         return item.id !== idItemCart;
       });
       state.data = result;
+      state.totalCount = state.data.length;
     },
     plusFoodCart: (state, action) => {
       const idItemCart = action.payload;
@@ -27,6 +30,7 @@ export const foodSlice = createSlice({
         return item.id === idItemCart;
       });
       state.data.push(findItemCart);
+      state.totalCount = state.data.length;
     },
     minusFoodCart: (state, action) => {
       const idItemCart = action.payload;
@@ -38,10 +42,13 @@ export const foodSlice = createSlice({
         }
       }
       state.data.splice(sliceIndex, 1);
+      state.totalCount = state.data.length;
     },
     setTotalCart: (state, action) => {
       state.total = action.payload;
-      console.log(action.payload)
+    },
+    clearCart: (state) => {
+      state.data = [];
     },
   },
 });
@@ -52,6 +59,7 @@ export const {
   plusFoodCart,
   minusFoodCart,
   setTotalCart,
+  clearCart,
 } = foodSlice.actions;
 
 export default foodSlice.reducer;

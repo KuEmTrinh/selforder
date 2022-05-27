@@ -4,13 +4,14 @@ import "./Cart.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import CartConfirm from "./CartConfirm";
 import {
   deleteFoodCart,
   plusFoodCart,
   minusFoodCart,
   setTotalCart,
 } from "../food/foodSlice";
-export default function Cart() {
+export default function Cart({tableInfo, tableId}) {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.food.data);
   const [cartData, setCartData] = useState("");
@@ -63,7 +64,8 @@ export default function Cart() {
     <>
       {cartData ? (
         <>
-          <p className="componentTitle cartTitle">Danh sách Order</p>
+          {/* <p className="componentTitle cartTitle">Danh sách Order</p> */}
+          <CartConfirm cartData={cartData} tableInfo={tableInfo} tableId={tableId}></CartConfirm>
           <div className="cart">
             {cartData.map((el, index) => {
               return (

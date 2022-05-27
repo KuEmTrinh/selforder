@@ -6,6 +6,8 @@ import { addFoodToCart } from "./foodSlice";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -14,7 +16,12 @@ export default function FoodList({ categoryId }) {
   const [foodList, setFoodList] = useState("");
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
   const addToCart = (index) => {
+    setDisableButton(true);
+    setTimeout(() => {
+      setDisableButton(false);
+    }, 1000);
     const sendData = JSON.stringify(foodList[index]);
     dispatch(addFoodToCart(sendData));
     setMessage("Đã thêm");
@@ -62,11 +69,7 @@ export default function FoodList({ categoryId }) {
           onClose={handleClose}
           key={vertical + horizontal}
         >
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: "50%" }}
-          >
+          <Alert onClose={handleClose} severity="success" sx={{ width: "50%" }}>
             {message}
           </Alert>
         </Snackbar>
@@ -85,14 +88,22 @@ export default function FoodList({ categoryId }) {
                     <p className="foodOrderJapanese">{el.japanese}</p>
                     <p className="foodOrderPrice">{el.price}</p>
                   </div>
-                  <button
-                    className="foodOrderButton"
-                    onClick={() => {
-                      addToCart(index);
-                    }}
-                  >
-                    Thêm
-                  </button>
+                  {disableButton ? (
+                    <button className="foodOrderButton disableButton">
+                      <Box sx={{ display: "flex" }}>
+                        <CircularProgress size="1.5rem" />
+                      </Box>
+                    </button>
+                  ) : (
+                    <button
+                      className="foodOrderButton"
+                      onClick={() => {
+                        addToCart(index);
+                      }}
+                    >
+                      Chọn
+                    </button>
+                  )}
                 </div>
               </div>
             );
