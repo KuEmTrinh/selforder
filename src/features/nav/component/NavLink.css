@@ -6,6 +6,7 @@
     padding: 15px 0;
     border-radius: 5px;
     margin: 15px 0;
+    font-weight: 500;
 }
 .linkItem:hover{
     transition: all 0.2s linear;

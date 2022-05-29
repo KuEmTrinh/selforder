@@ -9,6 +9,7 @@
     background-color: #fff;
     border-radius: 8px;
     padding: 2rem;
+    position: relative;
 }
 .componentTitle{
     font-weight: bold;
