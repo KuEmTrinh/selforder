@@ -11,7 +11,7 @@ import {
   minusFoodCart,
   setTotalCart,
 } from "../food/foodSlice";
-export default function Cart({tableInfo, tableId}) {
+export default function Cart({ userId, tableInfo, tableId }) {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.food.data);
   const [cartData, setCartData] = useState("");
@@ -65,7 +65,12 @@ export default function Cart({tableInfo, tableId}) {
       {cartData ? (
         <>
           {/* <p className="componentTitle cartTitle">Danh sách Order</p> */}
-          <CartConfirm cartData={cartData} tableInfo={tableInfo} tableId={tableId}></CartConfirm>
+          <CartConfirm
+            cartData={cartData}
+            userId={userId}
+            tableInfo={tableInfo}
+            tableId={tableId}
+          ></CartConfirm>
           <div className="cart">
             {cartData.map((el, index) => {
               return (

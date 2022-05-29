@@ -18,7 +18,11 @@ export default function Main({ userId, tableInfo, connectCode, tableId }) {
         <div>
           {componentNav === "List" ? <Food userId={userId}></Food> : ""}
           {componentNav === "Dashboard" ? (
-            <Cart userId={userId} tableInfo={tableInfo} tableId={tableId}></Cart>
+            <Cart
+              userId={userId}
+              tableInfo={tableInfo}
+              tableId={tableId}
+            ></Cart>
           ) : (
             ""
           )}

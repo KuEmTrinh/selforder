@@ -20,9 +20,16 @@ export default function Action() {
   return (
     <>
       <Navigation></Navigation>
-      {
-        tableInfo? <Main userId={tableInfo.uid} tableId={params?.id} tableInfo={tableInfo} connectCode={params?.code}></Main>: ""
-      }
+      {tableInfo ? (
+        <Main
+          userId={tableInfo.uid}
+          tableInfo={tableInfo}
+          connectCode={params?.code}
+          tableId={params?.id}
+        ></Main>
+      ) : (
+        ""
+      )}
     </>
   );
 }

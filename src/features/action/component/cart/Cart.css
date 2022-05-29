@@ -69,3 +69,13 @@
     justify-content: center;
     z-index: 999;
 }
+
+.cartToggleConfirm{
+    display: flex;
+    justify-content: center;
+}
+
+.disableButton{
+    background: rgb(234, 234, 234);
+    color: rgb(87, 87, 87);
+}
