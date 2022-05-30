@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { db } from "../../../../app/firebase";
 import { useSelector } from "react-redux";
 import OrderItem from "./OrderItem";
+import OrderComplete from "./OrderComplete";
 import "./Order.css";
-import { firebase } from "../../../../app/firebase";
-import LibraryAddCheckIcon from "@mui/icons-material/LibraryAddCheck";
 export default function Order() {
   const userInfo = JSON.parse(useSelector((state) => state.login.data));
   const [order, setOrder] = useState("");
@@ -33,14 +32,18 @@ export default function Order() {
   return (
     <>
       {order ? (
-        <div className="orderList">
-          <div className="completeBox">
-            <LibraryAddCheckIcon></LibraryAddCheckIcon>
+        <>
+          <OrderComplete order={order} userInfo={userInfo}></OrderComplete>
+          <div className="orderList">
+            {order.map((el, index) => {
+              return (
+                <>
+                  <OrderItem el={el} key={index} userInfo={userInfo} />
+                </>
+              );
+            })}
           </div>
-          {order.map((el, index) => {
-            return <OrderItem el={el} key={index} userInfo={userInfo} />;
-          })}
-        </div>
+        </>
       ) : (
         ""
       )}

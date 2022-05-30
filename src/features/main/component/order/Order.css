@@ -11,6 +11,9 @@
 .normalBorder{
     border-left: 5px solid #D9D9D9;
 }
+.greenBorder{
+    border-left: 5px solid #4CAF50;
+}
 .wrapFlex{
     width: calc(100% - 2rem);
     display: flex;
@@ -43,4 +46,26 @@
     position: absolute;
     top: 0;
     right: 0;
+    padding: 0.3rem;
+}
+
+.orderCompleteBox{
+    width: 65vh;
+    height: 73vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    overflow-x: auto;
+}
+.orderCompleteTitle{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.orderItemGreenBackground{
+    background-color: #c4ecc5;
+}
+.foodCountSpecialGreen{
+    background-color: #4CAF50;
 }
