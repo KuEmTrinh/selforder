@@ -4,11 +4,14 @@
     border-radius: 5px;
     margin-right: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    min-width: fit-content;
 }
 .categoryBox{
-    padding: 25px;
+    padding: 15px;
     background-color: #fff;
     overflow-x: auto;
+    display: flex;
+    word-wrap: normal;
 }
 
 .active {

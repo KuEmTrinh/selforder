@@ -62,7 +62,7 @@ export default function OrderComplete({ userInfo, deleteToggle }) {
           <div className="orderCompleteBox">
             {order.map((el, index) => {
               return (
-                <>
+                <div key={el.id}>
                   {el.status == 2 || el.status == 3 ? (
                     <div
                       className={
@@ -94,7 +94,7 @@ export default function OrderComplete({ userInfo, deleteToggle }) {
                   ) : (
                     ""
                   )}
-                </>
+                </div>
               );
             })}
           </div>

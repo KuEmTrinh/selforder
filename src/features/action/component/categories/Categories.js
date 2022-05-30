@@ -12,7 +12,7 @@ export default function Categories({ data }) {
       <div className="categoryBox">
         {data.map((element, index) => {
           return (
-            <span
+            <div
               className={
                 indexCategory == index
                   ? "categoryLabel active"
@@ -25,7 +25,7 @@ export default function Categories({ data }) {
               }}
             >
               {element.name}
-            </span>
+            </div>
           );
         })}
       </div>

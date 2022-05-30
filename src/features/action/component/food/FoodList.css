@@ -2,9 +2,10 @@
     display: flex;
     padding: 1rem;
     flex-wrap: wrap;
-    height: calc(100vh - 11.5rem);
+    height: calc(100vh - 11rem);
     overflow-y: auto;
     justify-content: space-between;
+    align-content: flex-start;
 }
 .foodOrderItem{
     width: 45%;
@@ -45,10 +46,11 @@ img{
     width: 85%;
 }
 .foodOrderVietnamese{
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
     word-break: break-all;
     color: #272727;
+    word-break: break-word;
 }
 .foodOrderJapanese{
     font-size: 0.8rem;
@@ -61,10 +63,12 @@ img{
     color: #272727;
 }
 .foodOrderButton{
+    height: fit-content;
+    width: auto;
     border: none;
     background-color: #272727;
     color: white;
-    padding: 0.6rem;
+    padding: 1.8rem 0.4rem;
     border-radius: 0.3rem;
     font-weight: bold;
     cursor: pointer;
@@ -72,4 +76,11 @@ img{
 .disableButton{
     background-color: rgb(234, 234, 234);
     padding: 0.9rem;
+    height: fit-content;
+    width: auto;
+    border: none;
+    padding: 1.5rem 0.7rem;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    cursor: pointer;
 }

@@ -51,7 +51,7 @@ export default function OrderItem({ order, userInfo, deleteItem }) {
       <div className="orderList">
         {order.map((el, index) => {
           return (
-            <>
+            <div key={el.id}>
               {el.status == 1 && deleteItem == false ? (
                 <div
                   className="orderItem normalBorder"
@@ -102,7 +102,7 @@ export default function OrderItem({ order, userInfo, deleteItem }) {
               ) : (
                 ""
               )}
-            </>
+            </div>
           );
         })}
       </div>
