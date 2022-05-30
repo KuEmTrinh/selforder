@@ -33,7 +33,7 @@ export default function TableQRCode(props) {
       />
       <div className="printButton">
         <button className="button button-green " onClick={handlePrint}>
-          In Mã
+          In Mã Qr
         </button>
       </div>
     </div>
