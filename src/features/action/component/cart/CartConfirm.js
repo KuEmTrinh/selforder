@@ -39,10 +39,13 @@ export default function CartConfirm({ cartData, userId, tableInfo, tableId }) {
       tableId: tableId,
       vietnamese: el.vietnamese,
       japanese: el.japanese,
-      price: el.newPrice,
+      newPrice: el.newPrice,
+      price: el.price,
       count: el.count,
+      imgUrl: el.imgUrl,
       status: 1,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updateAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     dispatch(clearCart());
   };

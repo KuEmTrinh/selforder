@@ -7,6 +7,10 @@ import "./Order.css";
 export default function Order() {
   const userInfo = JSON.parse(useSelector((state) => state.login.data));
   const [order, setOrder] = useState("");
+  const [deleteItem, setDeleteItem] = useState(false)
+  const deleteToggle = () =>{
+    setDeleteItem(!deleteItem)
+  }
   useEffect(() => {
     const query = db
       .collection("user")
@@ -23,6 +27,7 @@ export default function Order() {
             count: doc.data().count,
             status: doc.data().status,
             createdAt: doc.data().createdAt,
+            updateAt: doc.data().updateAt,
           });
         });
         setOrder(order);
@@ -33,16 +38,8 @@ export default function Order() {
     <>
       {order ? (
         <>
-          <OrderComplete order={order} userInfo={userInfo}></OrderComplete>
-          <div className="orderList">
-            {order.map((el, index) => {
-              return (
-                <>
-                  <OrderItem el={el} key={index} userInfo={userInfo} />
-                </>
-              );
-            })}
-          </div>
+          <OrderComplete order={order} userInfo={userInfo} deleteToggle={deleteToggle}></OrderComplete>
+          <OrderItem userInfo={userInfo} deleteItem={deleteItem} order={order}/>
         </>
       ) : (
         ""

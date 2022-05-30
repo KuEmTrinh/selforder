@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Food from "./food/Food";
 import { useSelector } from "react-redux";
 import Cart from "./cart/Cart";
+import List from "./list/List";
 export default function Main({ userId, tableInfo, connectCode, tableId }) {
   const componentNav = useSelector((state) => state.navigation.data);
   const tableCode = tableInfo.code;
@@ -23,6 +24,11 @@ export default function Main({ userId, tableInfo, connectCode, tableId }) {
               tableInfo={tableInfo}
               tableId={tableId}
             ></Cart>
+          ) : (
+            ""
+          )}
+          {componentNav === "OrderList" ? (
+            <List userId={userId} tableId={tableId}></List>
           ) : (
             ""
           )}

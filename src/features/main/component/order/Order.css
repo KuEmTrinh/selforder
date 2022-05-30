@@ -69,3 +69,19 @@
 .foodCountSpecialGreen{
     background-color: #4CAF50;
 }
+.foodCountSpecialWarning{
+    background-color: #af4c4c;
+}
+.orderActionBox{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+}
+
+.warningBorder{
+    border-left: 5px solid #af4c4c;
+}
+.warningBackground{
+    background-color: rgb(255, 218, 218)
+}
